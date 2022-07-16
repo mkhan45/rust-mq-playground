@@ -10,7 +10,9 @@ defmodule Router do
     send_cmd_artifact(
       conn,
       command: "cargo",
-      args: ["build", "--target", "wasm32-unknown-unknown", "--release"],
+      args: [
+        "build", "--target", "wasm32-unknown-unknown", "--release", "--frozen", "--offline", "-j", "2",
+      ],
       file: "target/wasm32-unknown-unknown/release/template.wasm",
       mime: "application/wasm"
     )
@@ -26,10 +28,10 @@ defmodule Router do
     )
   end
 
-  get "/js/index.js" do
+  get "/js/:file" do
     conn
     |> put_resp_header("content-type", "application/javascript")
-    |> send_file(200, "frontend/js/index.js")
+    |> send_file(200, "frontend/js/#{file}")
   end
 
   get "" do
@@ -57,7 +59,7 @@ defmodule Router do
     parent = self()
     {:ok, task} = Task.start(fn ->
       case System.cmd(command, args, cd: build_path, stderr_to_stdout: true, parallelism: true) do
-        {_, 0} -> send(parent, :success)
+        {_output, 0} -> send(parent, :success)
         {err, _} -> send(parent, err)
       end
     end)

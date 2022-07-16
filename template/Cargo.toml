@@ -9,4 +9,10 @@ edition = "2021"
 macroquad = "0.3"
 
 [profile.release]
-opt-level = "s"
+opt-level = 0
+overflow-checks = false
+debug = false
+lto = false
+panic = "abort"
+codegen-units = 128
+incremental = true

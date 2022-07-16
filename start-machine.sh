@@ -11,7 +11,7 @@ curl -i -X POST \
 -H "Authorization: Bearer ${FLY_API_TOKEN}" -H "Content-Type: application/json" \
 "http://${FLY_API_HOSTNAME}/v1/apps/rust-mq/machines" \
 -d '{
-  "name": "compiler-'${REGION}'-octa",
+  "name": "compiler-'${REGION}'-octa-2",
   "region": '\"${REGION}\"',
   "config": {
     "image": "mkhan45/test-runner:latest",

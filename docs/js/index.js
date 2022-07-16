@@ -65,7 +65,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
             method: "POST"
         };
 
-        fetch("https://rust-mq.fly.dev/compile", params)
+        fetch("/compile", params)
             .then(resp => {
                 let cloned = resp.clone();
 
@@ -93,7 +93,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 
         document.querySelector("#download-btn").innerHTML = "Compressing...";
-        fetch("https://rust-mq.fly.dev/download", params)
+        fetch("/download", params)
             .then(resp => resp.blob())
             .then(blob => {
                 let a = document.createElement('a');
