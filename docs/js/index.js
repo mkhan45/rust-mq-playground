@@ -65,7 +65,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
             method: "POST"
         };
 
-        fetch("/compile", params)
+        fetch("https://rust-mq.fly.dev/compile", params)
             .then(resp => {
                 let cloned = resp.clone();
 
